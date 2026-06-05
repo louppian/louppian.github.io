@@ -103,3 +103,21 @@ window.addEventListener("keydown", (e) => {
 window.addEventListener("resize", () => {
   track.scrollTo({ left: current * track.clientWidth });
 });
+
+// ===== 방문자 카운터 (무료, 가입 불필요 — Abacus) =====
+(async () => {
+  const el = document.getElementById("views");
+  const wrap = document.querySelector(".views-wrap");
+  if (!el) return;
+  try {
+    const res = await fetch("https://abacus.jasoncameron.dev/hit/louppian-cv/visits");
+    const data = await res.json();
+    const n = typeof data.value === "number" ? data.value : data.count;
+    if (typeof n === "number") {
+      el.textContent = n.toLocaleString();
+      if (wrap) wrap.hidden = false; // 성공했을 때만 표시
+    }
+  } catch (e) {
+    /* 실패 시 조용히 숨김 */
+  }
+})();
