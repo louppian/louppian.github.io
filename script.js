@@ -46,14 +46,14 @@ track.addEventListener(
   { passive: false }
 );
 
-// 2) 위치 표시용 점(dots) 생성
+// 2) 상단 메뉴(섹션 이름) 생성
 const dots = document.createElement("nav");
 dots.className = "dots";
-dots.setAttribute("aria-label", "Section indicator");
+dots.setAttribute("aria-label", "Sections");
 slides.forEach((slide, i) => {
   const b = document.createElement("button");
   b.type = "button";
-  b.setAttribute("aria-label", "Go to section " + (i + 1));
+  b.textContent = slide.dataset.nav || "Section " + (i + 1);
   b.addEventListener("click", () => {
     track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
   });
