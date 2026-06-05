@@ -26,19 +26,36 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* 스크롤하면 섹션 단위로 자연스럽게 넘어감 */
+  scroll-snap-type: y proximity;
+}
+
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.65;
+  font-size: 1.05rem;
   -webkit-font-smoothing: antialiased;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.resume {
+/* ===== Snap sections (full height) ===== */
+.snap {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 40px;
+  position: relative;
+}
+.snap-inner {
+  width: 100%;
   max-width: 1040px;
   margin: 0 auto;
-  padding: 64px 40px 32px;
 }
 
 /* ===== Theme toggle ===== */
@@ -46,13 +63,14 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 40px;
-  height: 40px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
   transition: transform 0.15s ease, background 0.2s ease;
 }
@@ -60,33 +78,32 @@ body {
   transform: scale(1.08);
 }
 
-/* ===== Header ===== */
-.header {
-  margin-bottom: 44px;
-}
+/* ===== Hero ===== */
 .name {
-  font-size: 2.6rem;
+  font-size: 4rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 .title {
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   color: var(--accent);
   font-weight: 600;
-  margin-top: 4px;
+  margin-top: 12px;
 }
 .tagline {
   color: var(--muted);
-  margin-top: 10px;
-  max-width: 70ch;
+  font-size: 1.2rem;
+  margin-top: 18px;
+  max-width: 60ch;
 }
 .contact {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 20px;
-  margin-top: 18px;
-  font-size: 0.92rem;
+  gap: 10px 24px;
+  margin-top: 28px;
+  font-size: 1rem;
 }
 .contact a,
 .contact span {
@@ -97,101 +114,81 @@ body {
   color: var(--accent);
 }
 
-/* ===== Tab bar ===== */
-.tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 28px;
-}
-.tab {
-  appearance: none;
-  border: none;
-  background: none;
-  font: inherit;
+/* scroll hint arrow on hero */
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
   color: var(--muted);
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 14px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  font-size: 1.6rem;
+  animation: bounce 1.8s ease-in-out infinite;
 }
-.tab:hover {
-  color: var(--text);
-}
-.tab[aria-selected="true"] {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
+  50%      { transform: translate(-50%, 8px); opacity: 1; }
 }
 
-/* ===== Panels ===== */
-.panel {
-  margin-bottom: 40px;
-  animation: fade 0.2s ease;
-}
-.panel[hidden] {
-  display: none;
-}
-@keyframes fade {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-/* 화면에서는 탭이 제목 역할을 하므로 숨김 (인쇄 시에만 표시) */
+/* ===== Section titles ===== */
 .panel-title {
-  display: none;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
 }
 .panel-note {
   color: var(--muted);
-  font-size: 0.92rem;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 .panel-note a {
   color: var(--accent);
 }
 .about {
-  max-width: 80ch;
+  font-size: 1.3rem;
+  max-width: 75ch;
+  color: var(--text);
 }
 
 /* ===== Timeline (year gutter) ===== */
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 28px;
 }
 .tl-row {
   display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 24px;
+  grid-template-columns: 140px 1fr;
+  gap: 28px;
   align-items: start;
 }
 .tl-year {
   color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  padding-top: 2px;
+  padding-top: 3px;
 }
 .tl-body {
   position: relative;
-  padding-left: 22px;
+  padding-left: 26px;
   border-left: 2px solid var(--border);
 }
 .tl-body::before {
   content: "";
   position: absolute;
-  left: -6px;
-  top: 7px;
-  width: 10px;
-  height: 10px;
+  left: -7px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--accent);
 }
 .tl-title {
   font-weight: 600;
+  font-size: 1.15rem;
 }
 .tl-org {
   color: var(--muted);
@@ -201,12 +198,12 @@ body {
 /* ===== Bullets ===== */
 .bullets {
   list-style: none;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 .bullets li {
   position: relative;
-  padding-left: 16px;
-  margin-bottom: 4px;
+  padding-left: 18px;
+  margin-bottom: 6px;
 }
 .bullets li::before {
   content: "–";
@@ -218,6 +215,7 @@ body {
 /* ===== Publications ===== */
 .pub {
   max-width: 85ch;
+  font-size: 1.08rem;
 }
 .pub-authors {
   color: var(--text);
@@ -229,8 +227,8 @@ body {
 .pub-link {
   color: var(--accent);
   text-decoration: none;
-  font-size: 0.88rem;
-  margin-left: 4px;
+  font-size: 0.95rem;
+  margin-left: 6px;
   white-space: nowrap;
 }
 .pub-link:hover {
@@ -241,60 +239,55 @@ body {
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
 }
 .tag {
   background: var(--tag-bg);
   color: var(--tag-text);
-  padding: 4px 12px;
+  padding: 8px 18px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 /* ===== Footer ===== */
 .footer {
-  text-align: center;
+  margin-top: 64px;
   color: var(--muted);
-  font-size: 0.82rem;
-  padding: 24px;
-  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
 }
 
-/* ===== Print (PDF export) ===== */
+/* ===== Print (PDF export) — flatten snap, show everything ===== */
 @media print {
+  html { scroll-snap-type: none; }
   .theme-toggle,
-  .tabs { display: none; }
-  .resume { padding: 0; max-width: 100%; }
-  body { background: #fff; color: #000; }
-  .tl-body { border-left-color: #ccc; }
-  /* 인쇄 시 모든 탭 내용을 펼치고 제목 표시 */
-  .panel[hidden] { display: block !important; }
-  .panel { margin-bottom: 24px; }
-  .panel-title {
+  .scroll-hint { display: none; }
+  .snap {
+    min-height: auto;
+    page-break-inside: avoid;
+    padding: 0 0 24px;
     display: block;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: #555;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 6px;
-    margin-bottom: 16px;
   }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .name { font-size: 2.2rem; }
+  .title { font-size: 1.1rem; }
+  .tagline, .about { font-size: 1rem; }
+  .panel-title { font-size: 1.2rem; margin-bottom: 14px; border-color: #ccc; }
+  .tl-body { border-left-color: #ccc; }
 }
 
-/* ===== Mobile: collapse timeline to single column ===== */
+/* ===== Mobile ===== */
 @media (max-width: 620px) {
-  .resume { padding: 56px 20px 24px; }
-  .name { font-size: 2.1rem; }
+  .snap { padding: 72px 22px; }
+  .name { font-size: 2.6rem; }
+  .title { font-size: 1.2rem; }
+  .tagline { font-size: 1.05rem; }
+  .panel-title { font-size: 1.7rem; }
+  .about { font-size: 1.1rem; }
   .tl-row {
     grid-template-columns: 1fr;
     gap: 6px;
   }
-  .tl-year {
-    padding-top: 0;
-  }
-  .tl-body {
-    padding-left: 16px;
-  }
+  .tl-year { padding-top: 0; }
+  .tl-body { padding-left: 18px; }
 }

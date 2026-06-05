@@ -24,23 +24,3 @@ function updateIcon() {
   const isDark = root.getAttribute("data-theme") === "dark";
   toggle.textContent = isDark ? "☀️" : "🌙";
 }
-
-// ===== 탭 전환 =====
-const tabs = Array.from(document.querySelectorAll(".tab"));
-const panels = Array.from(document.querySelectorAll(".panel"));
-
-function showTab(id) {
-  tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === id)));
-  panels.forEach((p) => (p.hidden = p.id !== id));
-  if (history.replaceState) history.replaceState(null, "", "#" + id);
-}
-
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => showTab(tab.dataset.tab));
-});
-
-// URL 해시(#publications 등)로 들어오면 해당 탭 열기
-const initial = location.hash.replace("#", "");
-if (initial && tabs.some((t) => t.dataset.tab === initial)) {
-  showTab(initial);
-}
