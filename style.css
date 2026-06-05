@@ -101,6 +101,13 @@ body {
   letter-spacing: -0.03em;
   line-height: 1.05;
 }
+.name-ko {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0;
+  margin-left: 8px;
+}
 .title {
   font-size: 1.5rem;
   color: var(--accent);
