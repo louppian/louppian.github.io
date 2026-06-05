@@ -101,13 +101,6 @@ body {
   letter-spacing: -0.03em;
   line-height: 1.05;
 }
-.name-ko {
-  font-size: 2rem;
-  font-weight: 500;
-  color: var(--muted);
-  letter-spacing: 0;
-  margin-left: 8px;
-}
 .title {
   font-size: 1.5rem;
   color: var(--accent);
@@ -134,6 +127,49 @@ body {
   text-decoration: none;
 }
 .contact a:hover {
+  color: var(--accent);
+}
+
+/* ===== Email dropdown ===== */
+.email-dd {
+  position: relative;
+  display: inline-block;
+}
+.email-dd summary {
+  cursor: pointer;
+  list-style: none;
+  color: var(--muted);
+}
+.email-dd summary::-webkit-details-marker { display: none; }
+.email-dd summary:hover,
+.email-dd[open] summary {
+  color: var(--accent);
+}
+.email-dd > ul {
+  position: absolute;
+  top: 150%;
+  left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 230px;
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  z-index: 5;
+}
+.email-dd > ul a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: var(--text);
+  white-space: nowrap;
+}
+.email-dd > ul a:hover {
+  background: var(--tag-bg);
   color: var(--accent);
 }
 
@@ -342,6 +378,17 @@ body {
   .tagline, .about { font-size: 1rem; }
   .panel-title { font-size: 1.2rem; margin-bottom: 14px; border-color: #ccc; }
   .tl-body { border-left-color: #ccc; }
+  /* 이메일 드롭다운: 인쇄 시 모두 펼쳐서 표시 */
+  .email-dd summary { display: none; }
+  .email-dd > ul {
+    display: flex !important;
+    position: static;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    min-width: 0;
+  }
+  .email-dd > ul a { padding: 0; }
 }
 
 /* ===== Mobile ===== */
