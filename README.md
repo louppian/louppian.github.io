@@ -9,8 +9,12 @@
 | 파일 | 설명 |
 |------|------|
 | `index.html` | 이력서 본문 (내용 수정은 여기서) |
-| `style.css` | 디자인 / 다크모드 색상 |
+| `style.css` | 디자인 / 다크모드 색상 / 연도 타임라인 |
 | `script.js` | 다크모드 토글, 연도 자동 표시 |
+
+academic CV 스타일 — 가로 넓은 레이아웃에 **Experience / Publications / Certificates / Education**
+섹션이 연도 거터(왼쪽 연도 + 오른쪽 내용) 타임라인으로 구성돼 있음. 각 섹션의 `.tl-row` 블록을
+복사해서 항목을 추가하면 됨.
 
 ## 로컬에서 보기
 

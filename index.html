@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>홍길동 · CV</title>
-  <meta name="description" content="홍길동의 이력서 / 포트폴리오" />
+  <title>Jane Doe · CV</title>
+  <meta name="description" content="Curriculum Vitae of Jane Doe" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환">🌙</button>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
 
   <main class="resume">
     <!-- ===== Header ===== -->
     <header class="header">
-      <h1 class="name">홍길동</h1>
-      <p class="title">Software Engineer</p>
-      <p class="tagline">한 줄 소개 — 무엇을 하는 사람이고 무엇을 잘하는지 한 문장으로.</p>
+      <h1 class="name">Jane Doe</h1>
+      <p class="title">Research Scientist · Medical Imaging &amp; Computer Vision</p>
+      <p class="tagline">
+        One-line summary — what you work on and what you do best, in a single sentence.
+      </p>
 
       <ul class="contact">
         <li><a href="mailto:you@example.com">you@example.com</a></li>
         <li><a href="https://github.com/louppian" target="_blank" rel="noopener">github.com/louppian</a></li>
         <li><a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a></li>
         <li><span>Seoul, Korea</span></li>
       </ul>
     </header>
@@ -31,53 +34,103 @@
     <!-- ===== About ===== -->
     <section class="section">
       <h2>About</h2>
-      <p>
-        간단한 자기소개 문단. 어떤 분야에서 몇 년 일했고, 어떤 문제를 푸는 걸
-        좋아하는지, 현재 관심사가 무엇인지 2~4문장으로 적어줘.
+      <p class="about">
+        Two to three sentences: your field and years of experience, the kind of
+        problems you like to solve, and your current research interests.
       </p>
     </section>
 
     <!-- ===== Experience ===== -->
     <section class="section">
       <h2>Experience</h2>
-
-      <div class="entry">
-        <div class="entry-head">
-          <span class="entry-title">직함 · 회사명</span>
-          <span class="entry-date">2023 — 현재</span>
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-year">2023 — Present</div>
+          <div class="tl-body">
+            <p class="tl-title">Research Scientist · <span class="tl-org">Organization Name</span></p>
+            <ul class="bullets">
+              <li>Result-oriented impact (e.g., improved inference latency by 40%).</li>
+              <li>Technologies used and the role you played.</li>
+            </ul>
+          </div>
         </div>
-        <ul class="bullets">
-          <li>한 일과 성과를 결과 중심으로. (예: 응답 속도 40% 개선)</li>
-          <li>사용한 기술과 맡은 역할.</li>
-        </ul>
-      </div>
 
-      <div class="entry">
-        <div class="entry-head">
-          <span class="entry-title">직함 · 이전 회사</span>
-          <span class="entry-date">2021 — 2023</span>
+        <div class="tl-row">
+          <div class="tl-year">2021 — 2023</div>
+          <div class="tl-body">
+            <p class="tl-title">Research Engineer · <span class="tl-org">Previous Lab / Company</span></p>
+            <ul class="bullets">
+              <li>Key responsibility 1.</li>
+              <li>Key responsibility 2.</li>
+            </ul>
+          </div>
         </div>
-        <ul class="bullets">
-          <li>주요 업무 1</li>
-          <li>주요 업무 2</li>
-        </ul>
       </div>
     </section>
 
-    <!-- ===== Projects ===== -->
+    <!-- ===== Publications ===== -->
     <section class="section">
-      <h2>Projects</h2>
-
-      <div class="entry">
-        <div class="entry-head">
-          <span class="entry-title">
-            <a href="#" target="_blank" rel="noopener">프로젝트 이름</a>
-          </span>
-          <span class="entry-date">2024</span>
+      <h2>Publications</h2>
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-year">2025</div>
+          <div class="tl-body">
+            <p class="pub">
+              <span class="pub-authors"><strong>J. Doe</strong>, A. Author, B. Author.</span>
+              "Paper Title Goes Here: A Descriptive Subtitle."
+              <span class="pub-venue">Venue / Conference, 2025.</span>
+              <a class="pub-link" href="#" target="_blank" rel="noopener">[paper]</a>
+              <a class="pub-link" href="#" target="_blank" rel="noopener">[code]</a>
+            </p>
+          </div>
         </div>
-        <ul class="bullets">
-          <li>무엇을 만들었고 왜 만들었는지, 핵심 기술 스택.</li>
-        </ul>
+
+        <div class="tl-row">
+          <div class="tl-year">2024</div>
+          <div class="tl-body">
+            <p class="pub">
+              <span class="pub-authors">A. Author, <strong>J. Doe</strong>, C. Author.</span>
+              "Another Paper Title On a Related Topic."
+              <span class="pub-venue">Journal Name, vol. 12, 2024.</span>
+              <a class="pub-link" href="#" target="_blank" rel="noopener">[paper]</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Certificates ===== -->
+    <section class="section">
+      <h2>Certificates</h2>
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-year">2024</div>
+          <div class="tl-body">
+            <p class="tl-title">Certificate Name <span class="tl-org">· Issuing Organization</span></p>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2023</div>
+          <div class="tl-body">
+            <p class="tl-title">Another Certification <span class="tl-org">· Issuer</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Education ===== -->
+    <section class="section">
+      <h2>Education</h2>
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-year">2017 — 2021</div>
+          <div class="tl-body">
+            <p class="tl-title">B.S. in Major <span class="tl-org">· University Name</span></p>
+            <ul class="bullets">
+              <li>Relevant coursework / activities / awards.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -86,31 +139,17 @@
       <h2>Skills</h2>
       <div class="tags">
         <span class="tag">Python</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">React</span>
         <span class="tag">PyTorch</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">Deep Learning</span>
         <span class="tag">Docker</span>
         <span class="tag">Git</span>
-      </div>
-    </section>
-
-    <!-- ===== Education ===== -->
-    <section class="section">
-      <h2>Education</h2>
-      <div class="entry">
-        <div class="entry-head">
-          <span class="entry-title">학위 · 학교명</span>
-          <span class="entry-date">2017 — 2021</span>
-        </div>
-        <ul class="bullets">
-          <li>전공 / 관련 활동 / 수상 등.</li>
-        </ul>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> 홍길동 · Built with GitHub Pages</p>
+    <p>© <span id="year"></span> Jane Doe · Built with GitHub Pages</p>
   </footer>
 
   <script src="script.js"></script>
