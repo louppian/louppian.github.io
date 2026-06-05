@@ -24,16 +24,26 @@
 
       <ul class="contact">
         <li><a href="mailto:you@example.com">you@example.com</a></li>
-        <li><a href="https://github.com/louppian" target="_blank" rel="noopener">github.com/louppian</a></li>
+        <li><a href="https://github.com/louppian" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a></li>
+        <li><a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener">Google Scholar</a></li>
         <li><span>Seoul, Korea</span></li>
       </ul>
     </header>
 
+    <!-- ===== Tab bar ===== -->
+    <nav class="tabs" role="tablist" aria-label="CV sections">
+      <button class="tab" role="tab" data-tab="about" aria-selected="true">About</button>
+      <button class="tab" role="tab" data-tab="experience">Experience</button>
+      <button class="tab" role="tab" data-tab="publications">Publications</button>
+      <button class="tab" role="tab" data-tab="certificates">Certificates</button>
+      <button class="tab" role="tab" data-tab="education">Education</button>
+      <button class="tab" role="tab" data-tab="skills">Skills</button>
+    </nav>
+
     <!-- ===== About ===== -->
-    <section class="section">
-      <h2>About</h2>
+    <section class="panel" id="about" role="tabpanel">
+      <h2 class="panel-title">About</h2>
       <p class="about">
         Two to three sentences: your field and years of experience, the kind of
         problems you like to solve, and your current research interests.
@@ -41,8 +51,8 @@
     </section>
 
     <!-- ===== Experience ===== -->
-    <section class="section">
-      <h2>Experience</h2>
+    <section class="panel" id="experience" role="tabpanel" hidden>
+      <h2 class="panel-title">Experience</h2>
       <div class="timeline">
         <div class="tl-row">
           <div class="tl-year">2023 — Present</div>
@@ -69,8 +79,12 @@
     </section>
 
     <!-- ===== Publications ===== -->
-    <section class="section">
-      <h2>Publications</h2>
+    <section class="panel" id="publications" role="tabpanel" hidden>
+      <h2 class="panel-title">Publications</h2>
+      <p class="panel-note">
+        Full list on
+        <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener">Google Scholar</a>.
+      </p>
       <div class="timeline">
         <div class="tl-row">
           <div class="tl-year">2025</div>
@@ -100,8 +114,8 @@
     </section>
 
     <!-- ===== Certificates ===== -->
-    <section class="section">
-      <h2>Certificates</h2>
+    <section class="panel" id="certificates" role="tabpanel" hidden>
+      <h2 class="panel-title">Certificates</h2>
       <div class="timeline">
         <div class="tl-row">
           <div class="tl-year">2024</div>
@@ -119,8 +133,8 @@
     </section>
 
     <!-- ===== Education ===== -->
-    <section class="section">
-      <h2>Education</h2>
+    <section class="panel" id="education" role="tabpanel" hidden>
+      <h2 class="panel-title">Education</h2>
       <div class="timeline">
         <div class="tl-row">
           <div class="tl-year">2017 — 2021</div>
@@ -135,8 +149,8 @@
     </section>
 
     <!-- ===== Skills ===== -->
-    <section class="section">
-      <h2>Skills</h2>
+    <section class="panel" id="skills" role="tabpanel" hidden>
+      <h2 class="panel-title">Skills</h2>
       <div class="tags">
         <span class="tag">Python</span>
         <span class="tag">PyTorch</span>
