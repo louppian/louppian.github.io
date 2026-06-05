@@ -28,20 +28,37 @@ function updateIcon() {
 // ===== 가로 슬라이드 =====
 const track = document.querySelector(".resume");
 const slides = Array.from(track.querySelectorAll(".snap"));
+let current = 0;
+let animating = false;
 
-// 1) 마우스 세로 휠 → 가로 스크롤 (트랙패드 가로 스와이프는 기본 동작 유지)
+function goTo(i) {
+  current = Math.max(0, Math.min(slides.length - 1, i));
+  animating = true;
+  track.scrollTo({ left: current * track.clientWidth, behavior: "smooth" });
+  setTimeout(() => (animating = false), 600);
+  updateDots();
+}
+
+// 1) 휠 한 번 = 한 슬라이드 (긴 슬라이드는 세로로 끝까지 본 뒤 넘어감)
 track.addEventListener(
   "wheel",
   (e) => {
-    // 슬라이드 내부가 세로로 넘칠 때는 내부 스크롤 우선
-    const slide = e.target.closest(".snap");
-    const canScrollVert = slide && slide.scrollHeight > slide.clientHeight;
-    if (canScrollVert) return;
+    const slide = slides[current];
+    const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
 
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      track.scrollLeft += e.deltaY;
-      e.preventDefault();
+    // 현재 슬라이드 내용이 화면보다 길면 그 안에서 세로 스크롤 우선
+    const overflowing = slide.scrollHeight > slide.clientHeight + 2;
+    if (overflowing) {
+      const atTop = slide.scrollTop <= 0;
+      const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 1;
+      if ((delta > 0 && !atBottom) || (delta < 0 && !atTop)) {
+        return; // 세로 스크롤 허용
+      }
     }
+
+    e.preventDefault();
+    if (animating || Math.abs(delta) < 6) return;
+    goTo(current + (delta > 0 ? 1 : -1));
   },
   { passive: false }
 );
@@ -54,24 +71,35 @@ slides.forEach((slide, i) => {
   const b = document.createElement("button");
   b.type = "button";
   b.textContent = slide.dataset.nav || "Section " + (i + 1);
-  b.addEventListener("click", () => {
-    track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
-  });
+  b.addEventListener("click", () => goTo(i));
   dots.appendChild(b);
 });
 document.body.appendChild(dots);
 const dotEls = Array.from(dots.children);
 
-// 3) 스크롤에 따라 현재 슬라이드 점 강조
 function updateDots() {
-  const idx = Math.round(track.scrollLeft / track.clientWidth);
-  dotEls.forEach((d, i) => d.classList.toggle("active", i === idx));
+  dotEls.forEach((d, i) => d.classList.toggle("active", i === current));
 }
-track.addEventListener("scroll", updateDots, { passive: true });
 updateDots();
 
-// 4) 키보드 좌우 화살표로도 이동
+// 3) 트랙패드 가로 스와이프/스크롤바로 움직였을 때 현재 인덱스 동기화
+track.addEventListener(
+  "scroll",
+  () => {
+    if (animating) return;
+    current = Math.round(track.scrollLeft / track.clientWidth);
+    updateDots();
+  },
+  { passive: true }
+);
+
+// 4) 키보드 좌우 화살표
 window.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") track.scrollBy({ left: track.clientWidth, behavior: "smooth" });
-  if (e.key === "ArrowLeft") track.scrollBy({ left: -track.clientWidth, behavior: "smooth" });
+  if (e.key === "ArrowRight") goTo(current + 1);
+  if (e.key === "ArrowLeft") goTo(current - 1);
+});
+
+// 5) 창 크기 변경 시 현재 슬라이드 위치 보정
+window.addEventListener("resize", () => {
+  track.scrollTo({ left: current * track.clientWidth });
 });
